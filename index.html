@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC RESCUE | Respawn your PC</title>
+    <style>
+        :root {
+            --green: #9dff00;
+            --blue: #00d9ff;
+            --dark: #080b10;
+            --panel: #111923;
+            --text: #edf4f8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--dark);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 8%;
+            border-bottom: 1px solid #26333b;
+        }
+
+        .logo {
+            color: var(--green);
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 22px;
+        }
+
+        .status {
+            color: var(--blue);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        main {
+            min-height: 80vh;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+            padding: 65px 8%;
+            background-image:
+                linear-gradient(#00d9ff08 1px, transparent 1px),
+                linear-gradient(90deg, #00d9ff08 1px, transparent 1px);
+            background-size: 35px 35px;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 0.98;
+            margin: 20px 0;
+            letter-spacing: -3px;
+        }
+
+        h1 span {
+            color: var(--green);
+        }
+
+        .intro {
+            color: #a8b7c5;
+            line-height: 1.8;
+            max-width: 510px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: 800;
+            border: 1px solid var(--green);
+            color: var(--green);
+            border-radius: 4px;
+        }
+
+        .primary {
+            background: var(--green);
+            color: #10150a;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, #15232b, #0c1119);
+            border: 1px solid #28434b;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 0 45px #00d9ff12;
+        }
+
+        .screen {
+            min-height: 220px;
+            border: 1px solid #35434c;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: radial-gradient(ellipse, #173b3b, #080b10 70%);
+            margin-bottom: 20px;
+        }
+
+        .chip {
+            font-size: 68px;
+            filter: drop-shadow(0 0 16px #9dff0088);
+        }
+
+        .game-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .game-card p {
+            color: #a8b7c5;
+            line-height: 1.6;
+        }
+
+        .services {
+            padding: 60px 8%;
+        }
+
+        .services h2 {
+            font-size: 30px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .service {
+            background: var(--panel);
+            border: 1px solid #26333b;
+            padding: 24px;
+            border-radius: 8px;
+        }
+
+        .service h3 {
+            color: var(--blue);
+        }
+
+        .service p {
+            color: #a8b7c5;
+            line-height: 1.6;
+        }
+
+        footer {
+            border-top: 1px solid #26333b;
+            padding: 25px 8%;
+            color: #8796a3;
+            font-size: 13px;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+                padding: 45px 5%;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services {
+                padding: 40px 5%;
+            }
+
+            h1 {
+                letter-spacing: -1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">PC<span style="color:white">.</span>RESCUE</div>
+        <div class="status">SYSTEM ONLINE // BCN</div>
+    </header>
+
+    <main>
+        <section>
+            <div class="eyebrow">[ YOUR PC. YOUR RULES. ]</div>
+            <h1>¿TU PC<br>NECESITA UN<br><span>RESPAWN?</span></h1>
+            <p class="intro">
+                Recupera el rendimiento de tu ordenador.
+                Mantenimiento, optimización y soporte técnico
+                con una experiencia diseñada para gamers.
+            </p>
+            <div class="actions">
+                <a class="button primary" href="#juego">JUGAR PC RESCUE</a>
+                <a class="button" href="#servicios">VER SERVICIOS</a>
+            </div>
+        </section>
+
+        <section class="game-card" id="juego">
+            <div class="screen">
+                <div class="chip">▦</div>
+                <div class="eyebrow">PLAYER 01 // READY</div>
+            </div>
+            <h2>PC RESCUE: THE GAME</h2>
+            <p>
+                Recolecta componentes, esquiva los virus y
+                demuestra que puedes salvar el sistema.
+            </p>
+            <a class="button primary" href="../game/index.html">
+                INICIAR MISIÓN →
+            </a>
+        </section>
+    </main>
+
+    <section class="services" id="servicios">
+        <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
+        <h2>Servicios para tu setup</h2>
+        <div class="service-grid">
+            <article class="service">
+                <h3>01 / Mantenimiento físico</h3>
+                <p>Limpieza interna, revisión de componentes y cuidado del equipo.</p>
+            </article>
+            <article class="service">
+                <h3>02 / Optimización</h3>
+                <p>Revisión del sistema, programas de inicio y rendimiento general.</p>
+            </article>
+            <article class="service">
+                <h3>03 / Soporte técnico</h3>
+                <p>Diagnóstico de problemas, instalación de software y asistencia.</p>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        PC RESCUE // Soporte técnico para ordenadores · Barcelona
+    </footer>
+</body>
+</html>
