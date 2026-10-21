@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC RESCUE | Respawn your PC</title>
+    <title>MR. ROBOT | Reparamos tu Ordenador</title>
     <style>
         :root {
             --green: #9dff00;
@@ -152,6 +152,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
             margin-top: 25px;
+            align-items: stretch;
         }
 
         .service {
@@ -159,6 +160,9 @@
             border: 1px solid #26333b;
             padding: 24px;
             border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .service h3 {
@@ -199,25 +203,138 @@
                 letter-spacing: -1px;
             }
         }
+
+
+/* === PC RESCUE: SERVICIOS PREMIUM === */
+
+.service {
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 24px;
+  background: linear-gradient(180deg, #111923 0%, #080b10 100%);
+  border: 1px solid rgba(0, 255, 65, 0.22);
+  border-radius: 14px;
+  transition: transform 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.service:hover {
+  transform: translateY(-7px);
+  border-color: #9dff00;
+  box-shadow: 0 12px 35px rgba(157, 255, 0, 0.13);
+}
+
+.service-image {
+ height: 180px;
+ flex-shrink: 0;
+  margin-bottom: 22px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.25);
+  position: relative;
+}
+.service-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 13px 13px 0 0;
+}
+
+.service-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 11, 16, 0.85),
+    transparent 75%
+  );
+}
+
+.service-image.maintenance {
+  background-image:
+    linear-gradient(135deg, #12251d, #071018);
+}
+
+.service-image.optimization {
+  background-image:
+    linear-gradient(135deg, #10242c, #071018);
+}
+
+.service-image.support {
+  background-image:
+    linear-gradient(135deg, #21162d, #071018);
+}
+
+.service-number,
+.service-status {
+  display: block;
+  margin: 0 22px 12px;
+  color: #9dff00;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.service h3 {
+  margin: 0 22px 12px;
+  color: #edf4f8;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.service p {
+  margin: 0 22px 22px;
+  color: #a8b7c5;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.service-status {
+  padding-top: 14px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 255, 65, 0.15);
+  color: #00eaff;
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .service-image {
+    height: 200px;
+  }
+}
+.service-image {
+  overflow: hidden;
+}
+
+.service-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">PC<span style="color:white">.</span>RESCUE</div>
+        <div class="logo">PC<span style="color:white">.</span>MR. ROBOT</div>
         <div class="status">SYSTEM ONLINE // BCN</div>
     </header>
 
     <main>
         <section>
             <div class="eyebrow">[ YOUR PC. YOUR RULES. ]</div>
-            <h1>¿TU PC<br>NECESITA UN<br><span>RESPAWN?</span></h1>
+            <h1>¿TU PC<br>NECESITA UN<br><span>MANTENIMIENTO?</span></h1>
             <p class="intro">
                 Recupera el rendimiento de tu ordenador.
                 Mantenimiento, optimización y soporte técnico
                 con una experiencia diseñada para gamers.
             </p>
             <div class="actions">
-                <a class="button primary" href="#juego">JUGAR PC RESCUE</a>
+                <a class="button primary" href="#juego">JUGAR MR. ROBOT</a>
                 <a class="button" href="#servicios">VER SERVICIOS</a>
             </div>
         </section>
@@ -227,7 +344,7 @@
                 <div class="chip">▦</div>
                 <div class="eyebrow">PLAYER 01 // READY</div>
             </div>
-            <h2>PC RESCUE: THE GAME</h2>
+            <h2>MR. ROBOT: THE GAME</h2>
             <p>
                 Recolecta componentes, esquiva los virus y
                 demuestra que puedes salvar el sistema.
@@ -242,23 +359,42 @@
         <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
         <h2>Servicios para tu setup</h2>
         <div class="service-grid">
-            <article class="service">
-                <h3>01 / Mantenimiento físico</h3>
-                <p>Limpieza interna, revisión de componentes y cuidado del equipo.</p>
-            </article>
-            <article class="service">
-                <h3>02 / Optimización</h3>
-                <p>Revisión del sistema, programas de inicio y rendimiento general.</p>
-            </article>
-            <article class="service">
-                <h3>03 / Soporte técnico</h3>
-                <p>Diagnóstico de problemas, instalación de software y asistencia.</p>
-            </article>
+           
+<article class="service">
+<div class="service-image maintenance">
+  <img src="../Imagenes/Mantenimiento/mantenimiento.png" alt="Mantenimiento de PC">
+</div>
+  <span class="service-number">01 / HARDWARE</span>
+  <h3>Mantenimiento físico</h3>
+  <p>Limpieza interna, revisión de componentes y cuidado térmico para mantener tu equipo en plena forma.</p>
+  <span class="service-status">SYSTEM CARE</span>
+</article>
+
+<article class="service">
+  <div class="service-image optimization">
+    <img src="../Imagenes/Optimizacion/optimizacion.png" alt="Optimización de rendimiento">
+</div>
+  <span class="service-number">02 / PERFORMANCE</span>
+  <h3>Optimización de rendimiento</h3>
+  <p>Mejoramos el arranque, revisamos el sistema y eliminamos procesos innecesarios.</p>
+  <span class="service-status">PERFORMANCE MODE</span>
+</article>
+
+<article class="service">
+  <div class="service-image support">
+    <img src="../Imagenes/Soporte/soporte.png" alt="Soporte técnico">
+</div>
+  <span class="service-number">03 / TECH SUPPORT</span>
+  <h3>Soporte técnico</h3>
+  <p>Diagnóstico de averías, instalación de software y asistencia para recuperar el control de tu equipo.</p>
+  <span class="service-status">TECH ASSIST</span>
+</article>
+
         </div>
     </section>
 
     <footer>
-        PC RESCUE // Soporte técnico para ordenadores · Barcelona
+        MR. ROBOT // Soporte técnico para ordenadores · Barcelona
     </footer>
 </body>
 </html>
