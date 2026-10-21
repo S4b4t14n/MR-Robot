@@ -2,399 +2,816 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR. ROBOT | Reparamos tu Ordenador</title>
-    <style>
-        :root {
-            --green: #9dff00;
-            --blue: #00d9ff;
-            --dark: #080b10;
-            --panel: #111923;
-            --text: #edf4f8;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b10">
+  <meta name="description" content="PC Rescue Barcelona: mantenimiento de ordenadores, optimización de rendimiento y soporte técnico para tu PC gaming o equipo de trabajo.">
+  <title>PC RESCUE | Mantenimiento y Soporte PC en Barcelona</title>
 
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --green: #9dff00;
+      --blue: #00d9ff;
+      --dark: #080b10;
+      --panel: #101720;
+      --text: #edf4f8;
+      --muted: #a8b7c5;
+      --line: rgba(157, 255, 0, .2);
+    }
 
-        body {
-            margin: 0;
-            background: var(--dark);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 8%;
-            border-bottom: 1px solid #26333b;
-        }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
 
-        .logo {
-            color: var(--green);
-            font-weight: 900;
-            letter-spacing: 2px;
-            font-size: 22px;
-        }
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
 
-        .status {
-            color: var(--blue);
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
+    a {
+      color: inherit;
+    }
 
-        main {
-            min-height: 80vh;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            align-items: center;
-            gap: 40px;
-            padding: 65px 8%;
-            background-image:
-                linear-gradient(#00d9ff08 1px, transparent 1px),
-                linear-gradient(90deg, #00d9ff08 1px, transparent 1px);
-            background-size: 35px 35px;
-        }
+    .container {
+      width: min(1200px, 84%);
+      margin: 0 auto;
+    }
 
-        .eyebrow {
-            color: var(--green);
-            letter-spacing: 3px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8, 11, 16, .94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #26333b;
+    }
 
-        h1 {
-            font-size: clamp(42px, 6vw, 76px);
-            line-height: 0.98;
-            margin: 20px 0;
-            letter-spacing: -3px;
-        }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        h1 span {
-            color: var(--green);
-        }
+    .logo {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
 
-        .intro {
-            color: #a8b7c5;
-            line-height: 1.8;
-            max-width: 510px;
-        }
+    .logo span {
+      color: white;
+    }
 
-        .actions {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
 
-        .button {
-            display: inline-block;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-weight: 800;
-            border: 1px solid var(--green);
-            color: var(--green);
-            border-radius: 4px;
-        }
+    .nav-links a {
+      color: #c5d0d8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition: color .2s;
+    }
 
-        .primary {
-            background: var(--green);
-            color: #10150a;
-        }
+    .nav-links a:hover {
+      color: var(--green);
+    }
 
-        .game-card {
-            background: linear-gradient(145deg, #15232b, #0c1119);
-            border: 1px solid #28434b;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 0 45px #00d9ff12;
-        }
+    .nav-links .nav-cta {
+      padding: 10px 15px;
+      color: #10150a;
+      background: var(--green);
+      border-radius: 5px;
+    }
 
-        .screen {
-            min-height: 220px;
-            border: 1px solid #35434c;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: radial-gradient(ellipse, #173b3b, #080b10 70%);
-            margin-bottom: 20px;
-        }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(0,217,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,217,255,.035) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
 
-        .chip {
-            font-size: 68px;
-            filter: drop-shadow(0 0 16px #9dff0088);
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      top: 5%;
+      left: -250px;
+      border-radius: 50%;
+      background: rgba(157,255,0,.07);
+      filter: blur(100px);
+      pointer-events: none;
+    }
 
-        .game-card h2 {
-            margin-bottom: 8px;
-        }
+    .hero-grid {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 55px;
+      padding-top: 65px;
+      padding-bottom: 75px;
+      position: relative;
+    }
 
-        .game-card p {
-            color: #a8b7c5;
-            line-height: 1.6;
-        }
+    .eyebrow {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
 
-        .services {
-            padding: 60px 8%;
-        }
+    h1 {
+      margin: 22px 0;
+      font-size: clamp(43px, 5.5vw, 76px);
+      line-height: .99;
+      letter-spacing: -3.5px;
+      font-weight: 950;
+    }
 
-        .services h2 {
-            font-size: 30px;
-        }
+    h1 span {
+      color: var(--green);
+      text-shadow: 0 0 35px rgba(157,255,0,.12);
+    }
 
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-top: 25px;
-            align-items: stretch;
-        }
+    .hero-copy {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
 
-        .service {
-            background: var(--panel);
-            border: 1px solid #26333b;
-            padding: 24px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
 
-        .service h3 {
-            color: var(--blue);
-        }
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 19px;
+      border: 1px solid var(--green);
+      border-radius: 5px;
+      color: var(--green);
+      text-decoration: none;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 850;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
 
-        .service p {
-            color: #a8b7c5;
-            line-height: 1.6;
-        }
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(157,255,0,.13);
+    }
 
-        footer {
-            border-top: 1px solid #26333b;
-            padding: 25px 8%;
-            color: #8796a3;
-            font-size: 13px;
-        }
+    .button.primary {
+      background: var(--green);
+      color: #10150a;
+    }
 
-        @media (max-width: 760px) {
-            header {
-                padding: 18px 5%;
-            }
+    .button.secondary {
+      border-color: #40515c;
+      color: var(--text);
+    }
 
-            main {
-                grid-template-columns: 1fr;
-                padding: 45px 5%;
-            }
+    .button.secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
 
-            .service-grid {
-                grid-template-columns: 1fr;
-            }
+    .hero-note {
+      margin-top: 23px;
+      color: #81919e;
+      font-size: 11px;
+      letter-spacing: .7px;
+    }
 
-            .services {
-                padding: 40px 5%;
-            }
+    .hero-note span {
+      color: var(--blue);
+    }
 
-            h1 {
-                letter-spacing: -1px;
-            }
-        }
+    .feature-panel {
+      position: relative;
+      padding: 12px;
+      border: 1px solid #29414a;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #14232b, #0b1017);
+      box-shadow: 0 25px 80px rgba(0,217,255,.06);
+    }
 
+    .feature-screen {
+      min-height: 270px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #30414a;
+      border-radius: 10px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at center, rgba(0,217,255,.13), transparent 65%),
+        #080b10;
+    }
 
-/* === PC RESCUE: SERVICIOS PREMIUM === */
+    .system-icon {
+      font-size: 76px;
+      line-height: 1.2;
+      color: var(--green);
+      text-shadow: 0 0 35px rgba(157,255,0,.4);
+    }
 
-.service {
-  position: relative;
-  overflow: hidden;
-  padding: 0 0 24px;
-  background: linear-gradient(180deg, #111923 0%, #080b10 100%);
-  border: 1px solid rgba(0, 255, 65, 0.22);
-  border-radius: 14px;
-  transition: transform 0.3s ease, border-color 0.3s ease,
-              box-shadow 0.3s ease;
-}
+    .system-status {
+      margin-top: 12px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
 
-.service:hover {
-  transform: translateY(-7px);
-  border-color: #9dff00;
-  box-shadow: 0 12px 35px rgba(157, 255, 0, 0.13);
-}
+    .feature-content {
+      padding: 20px 12px 12px;
+    }
 
-.service-image {
- height: 180px;
- flex-shrink: 0;
-  margin-bottom: 22px;
-  background-size: cover;
-  background-position: center;
-  border-bottom: 1px solid rgba(0, 255, 65, 0.25);
-  position: relative;
-}
-.service-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 13px 13px 0 0;
-}
+    .feature-content h2 {
+      margin: 0 0 8px;
+      font-size: 23px;
+      letter-spacing: -.7px;
+    }
 
-.service-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(8, 11, 16, 0.85),
-    transparent 75%
-  );
-}
+    .feature-content p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
 
-.service-image.maintenance {
-  background-image:
-    linear-gradient(135deg, #12251d, #071018);
-}
+    .feature-content .button {
+      width: 100%;
+    }
 
-.service-image.optimization {
-  background-image:
-    linear-gradient(135deg, #10242c, #071018);
-}
+    .section {
+      padding: 90px 0;
+    }
 
-.service-image.support {
-  background-image:
-    linear-gradient(135deg, #21162d, #071018);
-}
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 35px;
+    }
 
-.service-number,
-.service-status {
-  display: block;
-  margin: 0 22px 12px;
-  color: #9dff00;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
+    .section-heading h2 {
+      margin: 13px 0;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+    }
 
-.service h3 {
-  margin: 0 22px 12px;
-  color: #edf4f8;
-  font-size: 19px;
-  line-height: 1.35;
-}
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
 
-.service p {
-  margin: 0 22px 22px;
-  color: #a8b7c5;
-  font-size: 14px;
-  line-height: 1.7;
-}
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
 
-.service-status {
-  padding-top: 14px;
-  margin-bottom: 0;
-  border-top: 1px solid rgba(0, 255, 65, 0.15);
-  color: #00eaff;
-  font-size: 9px;
-}
+    .service {
+      min-width: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: linear-gradient(180deg, #111923, #090d13);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
 
-@media (max-width: 700px) {
-  .service-image {
-    height: 200px;
-  }
-}
-.service-image {
-  overflow: hidden;
-}
+    .service:hover {
+      transform: translateY(-6px);
+      border-color: var(--green);
+      box-shadow: 0 15px 38px rgba(157,255,0,.09);
+    }
 
-.service-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    .service-image {
+      height: 210px;
+      overflow: hidden;
+      background: #101720;
+      border-bottom: 1px solid var(--line);
+    }
 
-    </style>
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .45s;
+    }
+
+    .service:hover .service-image img {
+      transform: scale(1.045);
+    }
+
+    .service-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 23px;
+    }
+
+    .service-number {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 2px;
+    }
+
+    .service h3 {
+      margin: 13px 0 8px;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .service p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .service .button {
+      width: 100%;
+      margin-top: auto;
+      font-size: 11px;
+    }
+
+    .benefits {
+      border-top: 1px solid #1c2b32;
+      border-bottom: 1px solid #1c2b32;
+      background: linear-gradient(110deg, #0c1319, #101a1c, #0b1118);
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      padding-top: 34px;
+      padding-bottom: 34px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(0,217,255,.3);
+      border-radius: 8px;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .benefit h3 {
+      margin: 0 0 5px;
+      font-size: 15px;
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .contact-section {
+      padding: 90px 0;
+    }
+
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 30px;
+      padding: 45px;
+      border: 1px solid rgba(157,255,0,.35);
+      border-radius: 15px;
+      background:
+        radial-gradient(ellipse at 90% 0%, rgba(157,255,0,.09), transparent 45%),
+        linear-gradient(130deg, #121b22, #0a0e14);
+    }
+
+    .contact-panel h2 {
+      margin: 12px 0;
+      font-size: clamp(29px, 4vw, 43px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+    }
+
+    .contact-panel p {
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-actions {
+      min-width: 200px;
+    }
+
+    .contact-actions .button {
+      width: 100%;
+      margin: 5px 0;
+    }
+
+    footer {
+      border-top: 1px solid #26333b;
+      padding: 30px 0;
+      color: #8796a3;
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      color: var(--green);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #a8b7c5;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--green);
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        width: 90%;
+      }
+
+      .hero-grid {
+        gap: 30px;
+      }
+
+      .service-grid {
+        gap: 13px;
+      }
+
+      .service-content {
+        padding: 18px;
+      }
+
+      .service-image {
+        height: 170px;
+      }
+
+      .contact-panel {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        min-height: 68px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .nav-links a:first-child {
+        display: none;
+      }
+
+      .nav-links .nav-cta {
+        padding: 9px 10px;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+        padding-bottom: 65px;
+      }
+
+      h1 {
+        font-size: clamp(43px, 11vw, 64px);
+        letter-spacing: -2px;
+      }
+
+      .feature-screen {
+        min-height: 200px;
+      }
+
+      .section,
+      .contact-section {
+        padding: 65px 0;
+      }
+
+      .service-grid,
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-image {
+        height: 220px;
+      }
+
+      .benefit-grid {
+        gap: 25px;
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+        padding: 27px 22px;
+      }
+
+      .contact-actions {
+        min-width: 0;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <div class="logo">PC<span style="color:white">.</span>MR. ROBOT</div>
-        <div class="status">SYSTEM ONLINE // BCN</div>
-    </header>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#" aria-label="PC Rescue, inicio">PC<span>.</span>MR. ROBOT</a>
 
-    <main>
-        <section>
-            <div class="eyebrow">[ YOUR PC. YOUR RULES. ]</div>
-            <h1>¿TU PC<br>NECESITA UN<br><span>MANTENIMIENTO?</span></h1>
-            <p class="intro">
-                Recupera el rendimiento de tu ordenador.
-                Mantenimiento, optimización y soporte técnico
-                con una experiencia diseñada para gamers.
-            </p>
-            <div class="actions">
-                <a class="button primary" href="#juego">JUGAR MR. ROBOT</a>
-                <a class="button" href="#servicios">VER SERVICIOS</a>
-            </div>
-        </section>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="game/index.html">Jugar</a>
+        <a class="nav-cta" href="https://wa.me/34614059122?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20PC." target="_blank" rel="noopener noreferrer">Pedir presupuesto ↗</a>
+      </nav>
+    </div>
+  </header>
 
-        <section class="game-card" id="juego">
-            <div class="screen">
-                <div class="chip">▦</div>
-                <div class="eyebrow">PLAYER 01 // READY</div>
-            </div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">[ TU PC. TUS REGLAS. ]</div>
+
+          <h1>
+            TU PC PUEDE<br>
+            DAR MUCHO<br>
+            <span>MÁS.</span>
+          </h1>
+
+          <p class="hero-copy">
+            ¿Tu ordenador va lento, se calienta demasiado o no rinde como debería?
+            Recupera su potencial con mantenimiento, optimización y soporte técnico.
+            Tu equipo merece funcionar al máximo.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="https://wa.me/34614059122?text=Hola%2C%20quiero%20pedir%20presupuesto%20para%20mi%20ordenador." target="_blank" rel="noopener noreferrer">
+              SOLICITAR PRESUPUESTO ↗
+            </a>
+            <a class="button secondary" href="#servicios">EXPLORAR SERVICIOS ↓</a>
+          </div>
+
+          <div class="hero-note">
+            <span>●</span> SOPORTE INFORMÁTICO // BARCELONA
+          </div>
+        </div>
+
+        <aside class="feature-panel" aria-label="Juego MR. Robot">
+          <div class="feature-screen">
+            <div class="system-icon" aria-hidden="true">▦</div>
+            <div class="system-status">SYSTEM READY // PLAYER 01</div>
+          </div>
+
+          <div class="feature-content">
+            <div class="eyebrow">[ MODO ARCADE ]</div>
             <h2>MR. ROBOT: THE GAME</h2>
             <p>
-                Recolecta componentes, esquiva los virus y
-                demuestra que puedes salvar el sistema.
+              Recolecta componentes, esquiva los virus y demuestra
+              que puedes salvar el sistema.
             </p>
-            <a class="button primary" href="/PC-Rescue/game/index.html">
-                INICIAR MISIÓN →
-            </a>
-        </section>
-    </main>
-
-    <section class="services" id="servicios">
-        <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
-        <h2>Servicios para tu setup</h2>
-        <div class="service-grid">
-           
-<article class="service">
-<div class="service-image maintenance">
-  <img src="Imagenes/Mantenimiento/mantenimiento.png" alt="Mantenimiento de PC">
-</div>
-  <span class="service-number">01 / HARDWARE</span>
-  <h3>Mantenimiento físico</h3>
-  <p>Limpieza interna, revisión de componentes y cuidado térmico para mantener tu equipo en plena forma.</p>
-  <span class="service-status">SYSTEM CARE</span>
-</article>
-
-<article class="service">
-  <div class="service-image optimization">
-    <img src="Imagenes/Optimizacion/Optimizacion.png" alt="Optimización de rendimiento">
-</div>
-  <span class="service-number">02 / PERFORMANCE</span>
-  <h3>Optimización de rendimiento</h3>
-  <p>Mejoramos el arranque, revisamos el sistema y eliminamos procesos innecesarios.</p>
-  <span class="service-status">PERFORMANCE MODE</span>
-</article>
-
-<article class="service">
-  <div class="service-image support">
-    <img src="Imagenes/Soporte/soporte.png" alt="Soporte técnico">
-</div>
-  <span class="service-number">03 / TECH SUPPORT</span>
-  <h3>Soporte técnico</h3>
-  <p>Diagnóstico de averías, instalación de software y asistencia para recuperar el control de tu equipo.</p>
-  <span class="service-status">TECH ASSIST</span>
-</article>
-
-        </div>
+            <a class="button primary" href="game/index.html">INICIAR MISIÓN →</a>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <footer>
-        MR. ROBOT // Soporte técnico para ordenadores · Barcelona
-    </footer>
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
+          <h2>Tu ordenador, en su mejor versión.</h2>
+          <p>
+            Soluciones informáticas para cuidar tu equipo, mejorar su rendimiento
+            y resolver los problemas que te impiden aprovecharlo.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service">
+            <div class="service-image">
+              <img src="Imagenes/Mantenimiento/mantenimiento.png"
+                   alt="Limpieza y mantenimiento físico de un ordenador"
+                   loading="lazy">
+            </div>
+            <div class="service-content">
+              <div class="service-number">01 / HARDWARE</div>
+              <h3>Mantenimiento físico</h3>
+              <p>
+                Limpieza interna, revisión de componentes y cuidado térmico
+                para ayudar a mantener tu equipo en buenas condiciones.
+              </p>
+              <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20mantenimiento%20f%C3%ADsico." target="_blank" rel="noopener noreferrer">
+                CONSULTAR SERVICIO ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">
+              <img src="Imagenes/Optimizacion/Optimizacion.png"
+                   alt="Optimización del rendimiento de un ordenador"
+                   loading="lazy">
+            </div>
+            <div class="service-content">
+              <div class="service-number">02 / PERFORMANCE</div>
+              <h3>Optimización de rendimiento</h3>
+              <p>
+                Revisión del arranque, configuración del sistema y procesos
+                innecesarios para aprovechar mejor los recursos del equipo.
+              </p>
+              <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20optimizaci%C3%B3n%20de%20rendimiento." target="_blank" rel="noopener noreferrer">
+                CONSULTAR SERVICIO ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">
+              <img src="Imagenes/Soporte/soporte.png"
+                   alt="Asistencia y soporte técnico informático"
+                   loading="lazy">
+            </div>
+            <div class="service-content">
+              <div class="service-number">03 / TECH SUPPORT</div>
+              <h3>Soporte técnico</h3>
+              <p>
+                Diagnóstico de problemas, instalación de software y ayuda
+                para recuperar el control de tu ordenador.
+              </p>
+              <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20necesito%20ayuda%20con%20un%20problema%20inform%C3%A1tico." target="_blank" rel="noopener noreferrer">
+                CONSULTAR SERVICIO ↗
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container benefit-grid">
+        <article class="benefit">
+          <div class="benefit-icon" aria-hidden="true">⌘</div>
+          <div>
+            <h3>Atención personalizada</h3>
+            <p>Cuéntanos qué le pasa a tu equipo y estudiaremos qué solución necesita.</p>
+          </div>
+        </article>
+
+        <article class="benefit">
+          <div class="benefit-icon" aria-hidden="true">↗</div>
+          <div>
+            <h3>Rendimiento optimizado</h3>
+            <p>Buscamos mejoras prácticas adaptadas al estado y uso de tu ordenador.</p>
+          </div>
+        </article>
+
+        <article class="benefit">
+          <div class="benefit-icon" aria-hidden="true">⌖</div>
+          <div>
+            <h3>Barcelona</h3>
+            <p>Contacta para consultar disponibilidad, servicios y opciones de atención.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow">[ READY TO UPGRADE? ]</div>
+            <h2>¿Hablamos de tu PC?</h2>
+            <p>
+              Explícanos qué necesitas y consulta las opciones para tu equipo.
+              Escríbenos por WhatsApp para solicitar información o presupuesto.
+            </p>
+          </div>
+
+          <div class="contact-actions">
+            <a class="button primary" href="https://wa.me/34614059122?text=Hola%2C%20vengo%20de%20la%20web%20de%20PC%20Rescue%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">
+              HABLAR POR WHATSAPP ↗
+            </a>
+            <a class="button secondary" href="game/index.html">JUGAR MR. ROBOT</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">PC RESCUE // MR. ROBOT</div>
+        <div>Soporte técnico para ordenadores · Barcelona</div>
+      </div>
+
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+        <a href="game/index.html">El juego</a>
+      </nav>
+
+      <div>© <span id="year"></span> PC Rescue</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
