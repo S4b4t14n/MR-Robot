@@ -1798,6 +1798,38 @@ header::after {
   text-decoration: none;
 }
 .footer-location:hover { color: var(--green); }
+
+.footer-location-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 9px;
+}
+.footer-location-row .footer-location { margin-top: 0; }
+.footer-flags {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.footer-flag {
+  display: block;
+  width: 32px;
+  height: 21px;
+  border: 1px solid rgba(0, 217, 255, .55);
+  border-radius: 3px;
+  box-shadow: 0 0 7px rgba(157, 255, 0, .12);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.footer-flag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(0, 217, 255, .35);
+}
+@media (max-width: 700px) {
+  .footer-location-row { gap: 10px; }
+  .footer-flag { width: 29px; height: 19px; }
+}
+
 .footer-links { align-items: center; }
 .footer-links .social-link { border-radius: 5px; }
 @media (max-width: 700px) {
@@ -2144,9 +2176,22 @@ header::after {
 <footer>
   <div class="container footer-inner">
     <div>
-      <div class="footer-brand">PC RESCUE // MR. ROBOT</div>
+      <div class="footer-brand">MR. ROBOT</div>
       <div class="footer-description">Soporte técnico para ordenadores · Barcelona</div>
-      <a class="footer-location" href="https://www.google.com/maps/search/?api=1&query=Barcelona%2C%20Espa%C3%B1a" target="_blank" rel="noopener noreferrer">⌖ Barcelona, España · Consultar ubicación ↗</a>
+      <div class="footer-location-row">
+        <a class="footer-location" href="https://www.google.com/maps/search/?api=1&query=Barcelona%2C%20Espa%C3%B1a" target="_blank" rel="noopener noreferrer">⌖ Barcelona, España · Consultar ubicación ↗</a>
+        <span class="footer-flags" aria-label="Banderas de Cataluña y Colombia">
+          <svg class="footer-flag" viewBox="0 0 36 24" role="img" aria-label="Bandera de Cataluña" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="24" fill="#FCDD09"/>
+            <path d="M0 3H36 M0 9H36 M0 15H36 M0 21H36" stroke="#DA121A" stroke-width="3"/>
+          </svg>
+          <svg class="footer-flag" viewBox="0 0 36 24" role="img" aria-label="Bandera de Colombia" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="12" fill="#FCD116"/>
+            <rect y="12" width="36" height="6" fill="#003893"/>
+            <rect y="18" width="36" height="6" fill="#CE1126"/>
+          </svg>
+        </span>
+      </div>
     </div>
 
     
@@ -2154,21 +2199,10 @@ header::after {
   <a href="#servicios">Servicios</a>
   <a href="#contacto">Contacto</a>
   <a href="game/index.html">El juego</a>
-
-  <a class="social-link"
-     href="https://www.facebook.com/profile.php?id=61594933623183"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="Síguenos en Facebook"
-     title="Facebook">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.6v2H7v3.2h2.8V21z"/>
-    </svg>
-  </a>
 </nav>
 
 
-    <div>© <span id="year"></span> PC Rescue</div>
+    <div>© <span id="year"></span> MR. ROBOT</div>
   </div>
 </footer>
 
