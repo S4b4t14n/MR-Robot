@@ -171,6 +171,30 @@ h1, h2, h3, .service-card h3 {
 .approved-review small { color:#65eaff; }
 .reviews-submit:disabled { opacity:.65; cursor:wait; }
 
+
+/* Botones alineados con el diseño de la página principal PC Rescue */
+:root{--green:#9dff00;--cyan:#00d9ff;}
+.btn,.game-reviews .reviews-submit,#matrixContinue,.page-home-action a,.whatsapp{
+  min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 19px;border:1px solid var(--green);border-radius:5px;
+  color:var(--green);background:transparent;text-decoration:none;text-align:center;
+  font:850 13px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.35px;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;
+}
+.btn:hover,.game-reviews .reviews-submit:hover,#matrixContinue:hover,.page-home-action a:hover,.whatsapp:hover{
+  transform:translateY(-3px);box-shadow:0 8px 25px rgba(157,255,0,.13);
+}
+.btn.primary,.game-reviews .reviews-submit,#matrixContinue,.page-home-action a,.whatsapp{
+  background:var(--green);color:#10150a;border-color:var(--green);
+}
+.btn:not(.primary):not(.danger){border-color:#40515c;color:#edf4f8;background:transparent;}
+.btn:not(.primary):not(.danger):hover{border-color:var(--cyan);color:var(--cyan);}
+.btn.danger{border-color:#ff3155;color:#ff7890;background:transparent;}
+.btn.danger:hover{border-color:#ff3155;color:#ff3155;box-shadow:0 8px 25px rgba(255,49,85,.12);}
+.game-reviews .reviews-submit:disabled{opacity:.65;cursor:wait;transform:none;box-shadow:none;}
+.whatsapp{margin-top:8px;}
+@media(max-width:650px){.btn,.game-reviews .reviews-submit,#matrixContinue,.page-home-action a,.whatsapp{font-size:12px;padding:12px 14px}.page-home-action a,.whatsapp{max-width:100%;}}
+
 </style>
 </head>
 <body>
@@ -185,6 +209,10 @@ h1, h2, h3, .service-card h3 {
 <section class="panel" id="nickPanel"><h2>IDENTIFICACIÓN DE JUGADOR</h2><p>Elige tu nick antes de entrar al sistema.</p><form class="nick-form" id="nickForm"><input id="nickInput" maxlength="16" minlength="2" pattern="[A-Za-z0-9_-]{2,16}" placeholder="TuNick_01" autocomplete="nickname" required><button class="btn primary" type="submit">CONFIRMAR NICK</button></form><p class="help">2–16 caracteres: letras, números, guion o guion bajo.</p></section>
 <section class="panel"><h2>ÚLTIMOS 5 JUGADORES</h2><p class="help">Resultados compartidos de las partidas terminadas en esta web.</p><div class="table-wrap"><table><thead><tr><th>#</th><th>NICK</th><th>PUNTUACIÓN</th><th>FECHA</th></tr></thead><tbody id="recentPlayers"><tr><td colspan="4">Cargando resultados…</td></tr></tbody></table></div><p id="leaderboardStatus" class="help" aria-live="polite"></p></section>
 <section id="result"><h2 class="section-title">CONEXIÓN RESTABLECIDA</h2><p class="help" id="finalScore"></p><h2 class="section-title">SERVICIOS MR. ROBOT</h2><div class="services"><article class="service-card"><img src="../Imagenes/Mantenimiento/mantenimiento.png" alt="Mantenimiento físico del ordenador" loading="lazy"><div class="service-copy"><h3>01 // MANTENIMIENTO</h3><p>Limpieza interna, revisión de temperaturas y mantenimiento preventivo.</p></div></article><article class="service-card"><img src="../Imagenes/Optimizacion/Optimizacion.png" alt="Optimización de un ordenador gaming" loading="lazy"><div class="service-copy"><h3>02 // OPTIMIZACIÓN GAMING</h3><p>Mejora del rendimiento y asesoramiento para tu PC gaming.</p></div></article><article class="service-card"><img src="../Imagenes/Soporte/soporte.png" alt="Soporte técnico y reparación de PC" loading="lazy"><div class="service-copy"><h3>03 // SOPORTE TÉCNICO</h3><p>Diagnóstico de averías, componentes defectuosos y errores del sistema.</p></div></article></div>
+
+
+<div class="page-home-action"><a href="../index.html">← VOLVER A LA PÁGINA PRINCIPAL</a></div><a class="whatsapp" href="https://wa.me/34614059122?text=Hola%20PC%20Rescue%2C%20quiero%20informaci%C3%B3n%20sobre%20vuestros%20servicios." target="_blank" rel="noopener noreferrer">CONTACTAR POR WHATSAPP</a></section>
+
 <section class="game-reviews" id="opiniones-juego" aria-labelledby="game-reviews-title">
 <div class="reviews-kicker">[ PLAYER FEEDBACK ]</div>
 <h2 id="game-reviews-title">Opiniones de clientes</h2>
@@ -215,8 +243,6 @@ h1, h2, h3, .service-card h3 {
 <p class="reviews-note" id="reviewsNote" role="status">Las opiniones se guardan como pendientes y solo aparecerán públicamente después de su aprobación.</p>
 <div id="approvedReviews" class="approved-reviews" aria-live="polite"><p class="help">Cargando opiniones aprobadas…</p></div>
 </section>
-
-<div class="page-home-action"><a href="../index.html">← VOLVER A LA PÁGINA PRINCIPAL</a></div><a class="whatsapp" href="https://wa.me/34614059122?text=Hola%20PC%20Rescue%2C%20quiero%20informaci%C3%B3n%20sobre%20vuestros%20servicios." target="_blank" rel="noopener noreferrer">CONTACTAR POR WHATSAPP</a></section>
 <footer class="footer">MR. ROBOT // SOPORTE TÉCNICO <br>PROTEGIENDO TU HARDWARE, NIVEL A NIVEL.</footer>
 </main>
 <div id="matrixWelcome" aria-hidden="true"><canvas id="matrixRain"></canvas><div class="matrix-message"><div class="matrix-kicker">SYSTEM REBOOT // MR. ROBOT</div><h2>MR. ROBOT</h2><p>BIENVENIDO<br><strong>Swami Rama</strong></p><p class="matrix-small">LA SEÑAL SE HA RESTABLECIDO<br>TU PRÓXIMA MISIÓN COMIENZA AHORA</p><button id="matrixContinue">ENTRAR AL SISTEMA</button></div></div>
