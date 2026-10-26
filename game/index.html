@@ -161,6 +161,16 @@ h1, h2, h3, .service-card h3 {
     font-weight: 900;
 }
 
+
+.approved-reviews { display:grid; gap:12px; margin-top:18px; }
+.approved-review { border:1px solid rgba(57,255,20,.35); background:rgba(0,12,5,.7); padding:14px; border-radius:8px; }
+.approved-review-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.approved-review-head strong { color:#f2f5f3; }
+.review-stars { color:#65ff85; letter-spacing:2px; }
+.approved-review p { white-space:pre-wrap; overflow-wrap:anywhere; margin:10px 0; }
+.approved-review small { color:#65eaff; }
+.reviews-submit:disabled { opacity:.65; cursor:wait; }
+
 </style>
 </head>
 <body>
@@ -202,19 +212,9 @@ h1, h2, h3, .service-card h3 {
 <button class="reviews-submit" type="submit">ENVIAR COMENTARIO</button>
 </div>
 </form>
-<p class="reviews-note">Todos los comentarios deberán ser revisados y aprobados por MR. ROBOT antes de aparecer públicamente. El formulario aún necesita conectarse a un sistema de almacenamiento y moderación para recibir opiniones reales.</p>
+<p class="reviews-note" id="reviewsNote" role="status">Las opiniones se guardan como pendientes y solo aparecerán públicamente después de su aprobación.</p>
+<div id="approvedReviews" class="approved-reviews" aria-live="polite"><p class="help">Cargando opiniones aprobadas…</p></div>
 </section>
-<script>
-document.getElementById("gameReviewForm")?.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const note = document.querySelector(".game-reviews .reviews-note");
-    if (note) {
-        note.textContent = "Comentario de prueba: no se ha enviado ni guardado. Las opiniones reales se publicarán solo después de tu aprobación, una vez conectado el sistema de almacenamiento y moderación.";
-        note.setAttribute("role", "status");
-        note.style.color = "#65ff85";
-    }
-});
-</script>
 
 <div class="page-home-action"><a href="../index.html">← VOLVER A LA PÁGINA PRINCIPAL</a></div><a class="whatsapp" href="https://wa.me/34614059122?text=Hola%20PC%20Rescue%2C%20quiero%20informaci%C3%B3n%20sobre%20vuestros%20servicios." target="_blank" rel="noopener noreferrer">CONTACTAR POR WHATSAPP</a></section>
 <footer class="footer">MR. ROBOT // SOPORTE TÉCNICO <br>PROTEGIENDO TU HARDWARE, NIVEL A NIVEL.</footer>
@@ -231,6 +231,37 @@ const SUPABASE_ANON_KEY = "sb_publishable_jz27544YUP6VOgGk_8jmHA_0T5GdfqO";
 const supabaseReady = window.supabase && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PEGA_AQUI") && !SUPABASE_ANON_KEY.includes("PEGA_AQUI");
 const db = supabaseReady ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
 const $=id=>document.getElementById(id), canvas=$("game"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+const reviewsForm=$("gameReviewForm"), reviewsNote=$("reviewsNote"), approvedReviews=$("approvedReviews");
+function reviewStatus(message, isError=false){if(!reviewsNote)return;reviewsNote.textContent=message;reviewsNote.style.color=isError?"#ff7b91":"#65ff85";}
+async function loadApprovedReviews(){
+  if(!approvedReviews)return;
+  if(!db){approvedReviews.innerHTML='<p class="help">Las opiniones no están conectadas todavía.</p>';return;}
+  const {data,error}=await db.from("game_reviews").select("reviewer_name,rating,comment,created_at").eq("status","approved").order("created_at",{ascending:false}).limit(20);
+  if(error){console.error("No se pudieron cargar opiniones aprobadas:",error);approvedReviews.innerHTML='<p class="help">No se pudieron cargar las opiniones.</p>';return;}
+  approvedReviews.replaceChildren();
+  if(!data || !data.length){const p=document.createElement("p");p.className="help";p.textContent="Todavía no hay opiniones aprobadas.";approvedReviews.appendChild(p);return;}
+  data.forEach(review=>{const article=document.createElement("article");article.className="approved-review";const head=document.createElement("div");head.className="approved-review-head";const name=document.createElement("strong");name.textContent=review.reviewer_name;const stars=document.createElement("span");stars.className="review-stars";stars.textContent="★".repeat(Number(review.rating)||0)+"☆".repeat(5-(Number(review.rating)||0));stars.setAttribute("aria-label",`${review.rating} de 5 estrellas`);head.append(name,stars);const comment=document.createElement("p");comment.textContent=review.comment;const date=document.createElement("small");date.textContent=new Date(review.created_at).toLocaleDateString("es-ES");article.append(head,comment,date);approvedReviews.appendChild(article);});
+}
+reviewsForm?.addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(!db){reviewStatus("No se ha podido enviar: la conexión con Supabase no está disponible.",true);return;}
+  const submit=reviewsForm.querySelector('button[type="submit"]');
+  const reviewer_name=$("game-review-name").value.trim();
+  const rating=Number($("game-review-rating").value);
+  const comment=$("game-review-message").value.trim();
+  if(!reviewer_name||!comment){reviewStatus("Escribe tu nombre y tu comentario antes de enviarlo.",true);return;}
+  if(rating<1||rating>5){reviewStatus("Selecciona una valoración entre 1 y 5 estrellas.",true);return;}
+  if(submit)submit.disabled=true;
+  reviewStatus("Enviando tu opinión…");
+  try{
+    const {error}=await db.from("game_reviews").insert({reviewer_name,rating,comment,status:"pending"});
+    if(error)throw error;
+    reviewsForm.reset();
+    reviewStatus("Opinión recibida. Queda pendiente de revisión y no será pública hasta que MR. ROBOT la apruebe.");
+  }catch(error){console.error("Error guardando opinión:",error);reviewStatus("No se pudo guardar la opinión. Comprueba las políticas de la tabla game_reviews en Supabase.",true);}
+  finally{if(submit)submit.disabled=false;}
+});
+loadApprovedReviews();
 let nick="",score=0,best=Number(localStorage.getItem("mrRobotBest")||0),lives=3,weapon=1,missed=0,missedBlock=0;
 let running=false,paused=false,ended=false,raf=null,last=0,time=0,spawn=0,shot=0,flash=0,shake=0,scoreSaved=false;
 const keys=new Set(),touch={left:false,right:false,fire:false};let bullets=[],enemyBullets=[],enemies=[],particles=[],stars=[];
