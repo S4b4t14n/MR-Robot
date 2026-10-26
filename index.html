@@ -1238,51 +1238,51 @@ header::after {
 
 /* Enlaces del menú */
 .nav-links a:not(.nav-cta):hover {
-  color: #ff1744;
+  color: #BF00FF;
   text-shadow:
-    0 0 5px rgba(255, 23, 68, .8),
-    0 0 12px rgba(255, 23, 68, .6);
+    0 0 5px rgba(191, 0, 255, .8),
+    0 0 12px rgba(191, 0, 255, .6);
 }
 
 /* Botón de presupuesto: fondo oscuro y borde rojo */
 .nav-links .nav-cta:hover {
   color: #fff;
-  background: #26030b;
-  border-color: #ff1744;
+  background: #190326;
+  border-color: #BF00FF;
   box-shadow:
-    0 0 6px #ff1744,
+    0 0 6px #BF00FF,
     0 0 15px rgba(255, 23, 68, .85),
-    0 0 30px rgba(255, 23, 68, .45);
+    0 0 30px rgba(191, 0, 255, .45);
 }
 
 /* Botones de la página */
 .button:hover {
-  border-color: #ff1744;
+  border-color: #BF00FF;
   box-shadow:
-    0 0 7px rgba(255, 23, 68, .8),
-    0 0 18px rgba(255, 23, 68, .45);
+    0 0 7px rgba(191, 0, 255, .8),
+    0 0 18px rgba(191, 0, 255, .45);
 }
 
 /* Botones principales */
 .button.primary:hover {
   color: #fff;
-  background: #26030b;
-  border-color: #ff1744;
+  background: #190326;
+  border-color: #BF00FF;
 }
 
 /* Tarjetas de servicios */
 .service:hover {
-  border-color: #ff1744;
+  border-color: #BF00FF;
   box-shadow:
-    0 0 10px rgba(255, 23, 68, .35),
+    0 0 10px rgba(191, 0, 255, .35),
     0 12px 30px rgba(255, 23, 68, .12);
 }
 
 /* Tarjeta del juego */
 .feature-panel:hover {
-  border-color: #ff1744;
+  border-color: #BF00FF;
   box-shadow:
-    0 0 10px rgba(255, 23, 68, .6),
+    0 0 10px rgba(191, 0, 255, .6),
     0 0 28px rgba(255, 23, 68, .3);
 }
 
@@ -1306,29 +1306,32 @@ header::after {
 }
 
 .social-link:hover {
-  color: #ff1744 !important;
-  border-color: #ff1744;
+  color: #BF00FF !important;
+  border-color: #BF00FF;
   background: rgba(255, 23, 68, .08);
   box-shadow:
-    0 0 7px rgba(255, 23, 68, .8),
-    0 0 18px rgba(255, 23, 68, .4);
+    0 0 7px rgba(191, 0, 255, .8),
+    0 0 18px rgba(191, 0, 255, .4);
 }
 
-/* ===== MR. ROBOT: TITULAR GLITCH ===== */
+/* ===== MR. ROBOT: TITULAR CON ENTRADA Y GLITCH ===== */
 
+/* Entrada suave de todo el titular */
 .hero h1 {
-  animation: mrTitleEnter 0.9s cubic-bezier(.2,.75,.25,1) both;
+  animation:
+    mrTitleEnter .9s cubic-bezier(.2,.75,.25,1) both,
+    mrMainGlitch 7s linear 1.2s infinite;
 }
 
+/* MÁS sigue siendo el punto focal verde */
 .hero h1 span {
   display: inline-block;
   animation:
-    mrTitleGlow 3s ease-in-out 0.9s infinite,
+    mrTitleGlow 3s ease-in-out .9s infinite,
     mrTitleGlitch 6s linear 1.5s infinite;
   will-change: text-shadow, transform;
 }
 
-/* Entrada del titular */
 @keyframes mrTitleEnter {
   from {
     opacity: 0;
@@ -1342,41 +1345,54 @@ header::after {
   }
 }
 
-/* Brillo verde de MÁS */
+/* Destellos cian y rojos discretos en las palabras blancas */
+@keyframes mrMainGlitch {
+  0%, 91%, 94%, 100% {
+    text-shadow:
+      2px 0 rgba(0, 217, 255, .22),
+      -2px 0 rgba(255, 23, 68, .13),
+      0 4px 18px rgba(0, 0, 0, .7);
+  }
+  92% {
+    text-shadow:
+      3px 0 rgba(0, 217, 255, .7),
+      -3px 0 rgba(255, 23, 68, .55),
+      0 4px 18px rgba(0, 0, 0, .7);
+  }
+  93% {
+    text-shadow:
+      -3px 0 rgba(0, 217, 255, .6),
+      3px 0 rgba(191, 0, 255, .45),
+      0 4px 18px rgba(0, 0, 0, .7);
+  }
+}
+
 @keyframes mrTitleGlow {
   0%, 100% {
     text-shadow:
       2px 0 rgba(0, 217, 255, .5),
-      -2px 0 rgba(255, 23, 68, .25),
+      -2px 0 rgba(191, 0, 255, .25),
       0 0 8px rgba(157, 255, 0, .55),
       0 0 22px rgba(157, 255, 0, .25);
   }
   50% {
     text-shadow:
       3px 0 rgba(0, 217, 255, .75),
-      -3px 0 rgba(255, 23, 68, .4),
+      -3px 0 rgba(191, 0, 255, .4),
       0 0 12px rgba(157, 255, 0, .9),
       0 0 35px rgba(157, 255, 0, .5);
   }
 }
 
-/* Glitch breve y discreto */
+/* Pequeño movimiento solo en MÁS */
 @keyframes mrTitleGlitch {
-  0%, 94%, 96%, 100% {
-    transform: translateX(0);
-  }
-  94.5% {
-    transform: translateX(-2px);
-  }
-  95% {
-    transform: translateX(2px);
-  }
-  95.5% {
-    transform: translateX(-1px);
-  }
+  0%, 94%, 96%, 100% { transform: translateX(0); }
+  94.5% { transform: translateX(-2px); }
+  95% { transform: translateX(2px); }
+  95.5% { transform: translateX(-1px); }
 }
 
-/* Accesibilidad: respetar la preferencia de reducir movimiento */
+/* Respetar la preferencia de reducir movimiento */
 @media (prefers-reduced-motion: reduce) {
   .hero h1,
   .hero h1 span {
