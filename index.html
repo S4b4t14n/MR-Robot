@@ -367,6 +367,10 @@ header {
 
 /* Esquinas angulares estilo consola */
 .feature-screen::before,
+.feature-screen.terminal-restart {
+  animation: terminalIgnition 1.1s ease-out both;
+}
+
 .feature-screen::after {
   content: "";
   position: absolute;
@@ -1030,6 +1034,78 @@ body {
   box-shadow:
     inset 0 0 25px rgba(157,255,0,.1),
     0 0 15px rgba(157,255,0,.12);
+  position: relative;
+  overflow: hidden;
+  animation: terminalIgnition 1.1s ease-out both;
+}
+
+.feature-screen.terminal-restart {
+  animation: terminalIgnition 1.1s ease-out both;
+}
+
+.feature-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(157,255,0,.10) 48%,
+    rgba(157,255,0,.22) 50%,
+    transparent 54%
+  );
+  transform: translateY(-110%);
+  animation: terminalSweep 1.15s ease-out .15s both;
+}
+
+@keyframes terminalIgnition {
+  0% { opacity: .15; filter: brightness(.25); box-shadow: inset 0 0 0 rgba(157,255,0,0); }
+  35% { opacity: .65; filter: brightness(1.8); }
+  55% { opacity: .35; filter: brightness(.65); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+@keyframes terminalSweep {
+  to { transform: translateY(110%); }
+}
+
+@keyframes terminalCursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-screen,
+  .feature-screen::after,
+  .terminal-cursor {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .terminal-code p.terminal-line {
+    transition: none;
+  }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: .65em;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(157,255,0,.75);
+  animation: terminalCursorBlink .85s steps(1, end) infinite;
+}
+
+.terminal-code p.terminal-line {
+  opacity: 0;
+  min-height: 1.5em;
+  transition: opacity .18s ease;
+}
+
+.terminal-code p.terminal-line.is-visible {
+  opacity: 1;
 }
 
 .terminal-top {
@@ -1314,7 +1390,50 @@ header::after {
     0 0 18px rgba(191, 0, 255, .4);
 }
 
-/* ===== MR. ROBOT: TITULAR CON ENTRADA Y GLITCH ===== */
+/* ===== MINI VISTA ARCADE EN LA PORTADA ===== */
+.game-preview-screen {
+  min-height: 270px;
+  padding: 12px;
+  display: block;
+  background: #020604;
+}
+.game-preview-screen .terminal-top {
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  font-size: 9px;
+}
+.preview-live { color: var(--green); white-space: nowrap; }
+.preview-live i {
+  display: inline-block;
+  width: 6px; height: 6px; margin-right: 5px;
+  border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: previewPulse 1.2s infinite;
+}
+#game-preview {
+  display: block;
+  width: 100%;
+  height: 190px;
+  margin-top: 8px;
+  background: #020609;
+  image-rendering: pixelated;
+}
+.preview-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 7px;
+  color: var(--green);
+  font: 700 8px "Oxanium", monospace;
+  letter-spacing: 1px;
+}
+@keyframes previewPulse { 50% { opacity: .3; } }
+@media (max-width: 700px) {
+  .game-preview-screen { min-height: 250px; padding: 12px; }
+  #game-preview { height: 170px; }
+}
+\n/* ===== MR. ROBOT: TITULAR CON ENTRADA Y GLITCH ===== */
 
 /* Entrada suave de todo el titular */
 .hero h1 {
@@ -1455,26 +1574,13 @@ header::after {
       </div>
 
       <aside class="feature-panel" aria-label="Juego MR. Robot">
-        <div class="feature-screen">
+        <div class="feature-screen game-preview-screen">
           <div class="terminal-top">
-            <span>/// MR.ROBOT SYSTEM</span>
-            <span>PLAYER 01</span>
+            <span>/// MR.ROBOT ARCADE</span>
+            <span class="preview-live"><i></i> DEMO EN VIVO</span>
           </div>
-
-          <div class="terminal-code" aria-label="Diagnóstico del sistema">
-            <p>&gt; BOOTING...</p>
-            <p>&gt; LOADING MODULES... <span>[100%]</span></p>
-            <p>&gt; CHECKING HARDWARE... <span>[OK]</span></p>
-            <p>&gt; SCANNING FOR THREATS... <span>[OK]</span></p>
-            <p class="terminal-ready">&gt; SYSTEM READY.</p>
-          </div>
-
-          <div class="pixel-robot" aria-hidden="true">
-            <span class="robot-eyes">▪ ▪</span>
-            <span class="robot-mouth">▰</span>
-          </div>
-
-          <div class="system-status">PRESS START</div>
+          <canvas id="game-preview" aria-label="Vista animada de demostración del juego arcade"></canvas>
+          <div class="preview-hud"><span>MISSION 01</span><span>MOVE // SHOOT // SURVIVE</span></div>
         </div>
 
         <div class="feature-content">
@@ -1612,7 +1718,81 @@ header::after {
 </footer>
 
 <script>
+/* Vista arcade decorativa: no accede al equipo ni realiza análisis reales. */
+(() => {
+  const canvas = document.getElementById("game-preview");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let w = 0, h = 0, last = 0, t = 0, shots = [], enemies = [], stars = [];
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = Math.max(1, rect.width); h = Math.max(1, rect.height);
+    canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({length: 45}, () => ({x:Math.random()*w,y:Math.random()*h,s:.5+Math.random()*1.5}));
+  }
+  function ship(x,y) {
+    ctx.save(); ctx.translate(x,y);
+    ctx.fillStyle="#9dff00"; ctx.shadowColor="#9dff00"; ctx.shadowBlur=12;
+    ctx.beginPath(); ctx.moveTo(0,-14); ctx.lineTo(11,10); ctx.lineTo(0,5); ctx.lineTo(-11,10); ctx.closePath(); ctx.fill();
+    ctx.fillStyle="#00d9ff"; ctx.fillRect(-3,6,6,7);
+    ctx.restore();
+  }
+  function draw(now) {
+    requestAnimationFrame(draw);
+    if (now-last < 45) return;
+    const dt = Math.min((now-last)/1000 || .045,.08); last=now; t+=dt;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle="#020609"; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle="rgba(157,255,0,.08)"; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    ctx.fillStyle="#9dff00";
+    stars.forEach(s=>{s.y+=s.s*18*dt;if(s.y>h)s.y=0;ctx.globalAlpha=.25+s.s*.3;ctx.fillRect(s.x,s.y,s.s,s.s);});
+    ctx.globalAlpha=1;
+    if(Math.random()<.045) enemies.push({x:12+Math.random()*(w-24),y:-8,v:30+Math.random()*35,phase:Math.random()*6});
+    if(Math.random()<.12) shots.push({x:w/2+Math.sin(t*1.8)*w*.22,y:h-35});
+    enemies.forEach(e=>{e.y+=e.v*dt;e.x+=Math.sin(t*2+e.phase)*10*dt;ctx.fillStyle="#BF00FF";ctx.shadowColor="#BF00FF";ctx.shadowBlur=8;ctx.fillRect(e.x-5,e.y-5,10,10);ctx.shadowBlur=0;});
+    enemies=enemies.filter(e=>e.y<h+12);
+    shots.forEach(s=>{s.y-=180*dt;ctx.fillStyle="#00d9ff";ctx.shadowColor="#00d9ff";ctx.shadowBlur=8;ctx.fillRect(s.x-1,s.y,2,8);});
+    shots=shots.filter(s=>s.y>-10);
+    ship(w/2+Math.sin(t*1.8)*w*.22,h-24);
+    ctx.fillStyle="rgba(191,0,255,.8)";ctx.font="bold 9px monospace";ctx.fillText("ARCADE PREVIEW",8,13);
+  }
+  resize(); window.addEventListener("resize",resize); requestAnimationFrame(draw);
+})();
+</script>
+
+<script>
 document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+<script>
+/* Animación decorativa de arranque de la consola arcade.
+   No realiza análisis ni comprobaciones reales del ordenador. */
+(() => {
+  const bootConsole = () => {
+    const screen = document.querySelector(".feature-screen");
+    const lines = document.querySelectorAll(".terminal-code .terminal-line");
+    if (!screen || !lines.length) return;
+
+    lines.forEach(line => line.classList.remove("is-visible"));
+    screen.classList.remove("terminal-restart");
+    void screen.offsetWidth;
+    screen.classList.add("terminal-restart");
+
+    lines.forEach((line, index) => {
+      window.setTimeout(() => line.classList.add("is-visible"), 500 + index * 650);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootConsole, { once: true });
+  } else {
+    bootConsole();
+  }
+})();
 </script>
 
 <script>
