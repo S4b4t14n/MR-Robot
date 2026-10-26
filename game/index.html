@@ -256,8 +256,33 @@ reviewsForm?.addEventListener("submit",async event=>{
   try{
     const {error}=await db.from("game_reviews").insert({reviewer_name,rating,comment,status:"pending"});
     if(error)throw error;
+
+    // Solicita el aviso por correo a la Edge Function de Supabase.
+    // La opinión queda guardada aunque el correo falle.
+    let emailSent = false;
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/notify-new-review`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({name: reviewer_name, rating, comment})
+      });
+      emailSent = response.ok;
+      if (!response.ok) {
+        console.error("No se pudo enviar el aviso por correo:", await response.text());
+      }
+    } catch (emailError) {
+      console.error("Error al contactar la función de avisos:", emailError);
+    }
+
     reviewsForm.reset();
-    reviewStatus("Opinión recibida. Queda pendiente de revisión y no será pública hasta que MR. ROBOT la apruebe.");
+    if (emailSent) {
+      reviewStatus("Opinión recibida y aviso enviado. Queda pendiente de revisión y no será pública hasta que MR. ROBOT la apruebe.");
+    } else {
+      reviewStatus("Opinión guardada como pendiente, pero no se pudo confirmar el envío del correo. Revisa los registros de la función en Supabase.");
+    }
   }catch(error){console.error("Error guardando opinión:",error);reviewStatus("No se pudo guardar la opinión. Comprueba las políticas de la tabla game_reviews en Supabase.",true);}
   finally{if(submit)submit.disabled=false;}
 });
