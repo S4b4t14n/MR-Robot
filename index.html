@@ -1521,6 +1521,226 @@ header::after {
   }
 }
 
+
+/* ===== HOVER ROJO NEÓN: EL COLOR BASE SE CONSERVA ===== */
+:root {
+  --hover-red: #ff1744;
+  --hover-red-soft: rgba(255, 23, 68, .72);
+  --hover-red-faint: rgba(255, 23, 68, .28);
+}
+
+/* Enlaces de navegación: solo cambia el texto y el brillo al pasar el ratón */
+.nav-links a:not(.nav-cta):hover,
+.footer-links a:hover {
+  color: var(--hover-red);
+  text-shadow:
+    0 0 5px var(--hover-red-soft),
+    0 0 13px var(--hover-red-faint);
+}
+
+/* Botones: conservan su fondo habitual y reciben borde y halo rojos */
+.button:hover,
+.nav-links .nav-cta:hover {
+  border-color: var(--hover-red);
+  box-shadow:
+    0 0 7px var(--hover-red-soft),
+    0 0 18px var(--hover-red-faint),
+    0 0 32px rgba(255, 23, 68, .16);
+}
+
+/* El botón principal mantiene su verde; solo destaca el contorno rojo */
+.button.primary:hover {
+  color: #10150a;
+  background: var(--green);
+  border-color: var(--hover-red);
+  box-shadow:
+    0 0 7px var(--hover-red-soft),
+    0 0 20px var(--hover-red-faint),
+    0 0 34px rgba(255, 23, 68, .2);
+}
+
+/* El CTA del menú conserva el fondo verde */
+.nav-links .nav-cta:hover {
+  color: #10150a;
+  background: var(--green);
+  border-color: var(--hover-red);
+  box-shadow:
+    0 0 7px var(--hover-red-soft),
+    0 0 20px var(--hover-red-faint);
+}
+
+/* Tarjetas: brillo rojo en el contorno, sin teñir todo el contenido */
+.service:hover,
+.feature-panel:hover {
+  border-color: var(--hover-red);
+  box-shadow:
+    0 0 9px var(--hover-red-soft),
+    0 0 24px var(--hover-red-faint),
+    0 12px 30px rgba(255, 23, 68, .10);
+}
+
+/* Icono social: mantiene su cian hasta que se interactúa con él */
+.social-link:hover {
+  color: var(--hover-red) !important;
+  border-color: var(--hover-red);
+  background: rgba(0, 217, 255, .06);
+  box-shadow:
+    0 0 7px var(--hover-red-soft),
+    0 0 18px var(--hover-red-faint);
+}
+
+/* No mostrar efectos hover en dispositivos sin puntero preciso */
+@media (hover: none) {
+  .nav-links a:not(.nav-cta):hover,
+  .footer-links a:hover {
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+
+/* ===== TARJETAS DE SERVICIOS: CLARIDAD + NEÓN TÉCNICO ===== */
+.service-grid {
+  gap: 22px;
+}
+
+.service {
+  position: relative;
+  border: 1px solid rgba(157, 255, 0, .34);
+  box-shadow:
+    0 0 0 1px rgba(0, 217, 255, .04),
+    inset 0 0 22px rgba(0, 217, 255, .025);
+  background:
+    linear-gradient(145deg, rgba(13, 22, 24, .98), rgba(5, 9, 13, .99));
+}
+
+.service::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-top: 2px solid rgba(0, 217, 255, .48);
+  opacity: .7;
+}
+
+.service:hover {
+  border-color: var(--green);
+  box-shadow:
+    0 0 0 1px rgba(157, 255, 0, .16),
+    0 0 12px rgba(157, 255, 0, .24),
+    0 0 28px rgba(0, 217, 255, .12),
+    0 15px 38px rgba(0, 0, 0, .35);
+}
+
+.service-image {
+  position: relative;
+  border-bottom-color: rgba(0, 217, 255, .28);
+}
+
+.service-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(5, 9, 13, .55));
+}
+
+.service-content {
+  padding: 24px 23px 25px;
+}
+
+.service-number {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--blue);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+.service-tech-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  border: 1px solid rgba(0, 217, 255, .5);
+  background: rgba(0, 217, 255, .07);
+  color: var(--green);
+  font-size: 20px;
+  line-height: 1;
+  text-shadow: 0 0 9px rgba(157, 255, 0, .45);
+  box-shadow: inset 0 0 10px rgba(0, 217, 255, .04);
+  transition: color .25s, border-color .25s, box-shadow .25s, transform .25s;
+}
+
+.service h3 {
+  min-height: 2.6em;
+  margin: 17px 0 10px;
+  font-family: "Black Ops One", Impact, sans-serif;
+  font-weight: 400;
+  color: #f5f5f2;
+  font-size: clamp(21px, 1.8vw, 26px);
+  line-height: 1.18;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  text-shadow:
+    2px 0 rgba(0, 217, 255, .24),
+    -2px 0 rgba(255, 30, 50, .14),
+    0 0 12px rgba(0, 217, 255, .14),
+    0 4px 18px rgba(0, 0, 0, .55);
+  transition: color .25s, text-shadow .25s, transform .25s;
+}
+
+.service h3::first-letter {
+  color: var(--green);
+}
+
+.service:hover h3 {
+  color: #ffffff;
+  text-shadow:
+    2px 0 rgba(0, 217, 255, .55),
+    -2px 0 rgba(255, 30, 50, .28),
+    0 0 7px rgba(157, 255, 0, .7),
+    0 0 22px rgba(157, 255, 0, .32);
+  transform: translateX(2px);
+}
+
+.service p {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.service:hover .service-tech-icon {
+  color: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 9px rgba(157, 255, 0, .35), 0 0 18px rgba(0, 217, 255, .12);
+  transform: translateY(-2px);
+}
+
+.service .button {
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .service-grid { gap: 15px; }
+  .service-content { padding: 19px; }
+  .service h3 { font-size: 20px; }
+}
+
+@media (max-width: 700px) {
+  .service-grid { gap: 20px; }
+  .service-content { padding: 22px; }
+  .service h3 { min-height: 0; font-size: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-tech-icon,
+  .service h3 { transition: none; }
+}
+
 </style>
 </head>
 
@@ -1607,7 +1827,7 @@ header::after {
             <img src="Imagenes/Mantenimiento/mantenimiento.png" alt="Limpieza y mantenimiento físico de un ordenador" loading="lazy">
           </div>
           <div class="service-content">
-            <div class="service-number">01 / HARDWARE</div>
+            <div class="service-number"><span class="service-tech-icon" aria-hidden="true">⚙</span> 01 / HARDWARE</div>
             <h3>Mantenimiento físico</h3>
             <p>Limpieza interna, revisión de componentes y cuidado térmico para ayudar a mantener tu equipo en buenas condiciones.</p>
             <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20mantenimiento%20f%C3%ADsico." target="_blank" rel="noopener noreferrer">CONSULTAR SERVICIO ↗</a>
@@ -1619,7 +1839,7 @@ header::after {
             <img src="Imagenes/Optimizacion/Optimizacion.png" alt="Optimización del rendimiento de un ordenador" loading="lazy">
           </div>
           <div class="service-content">
-            <div class="service-number">02 / PERFORMANCE</div>
+            <div class="service-number"><span class="service-tech-icon" aria-hidden="true">↗</span> 02 / PERFORMANCE</div>
             <h3>Optimización de rendimiento</h3>
             <p>Revisión del arranque, configuración del sistema y procesos innecesarios para aprovechar mejor los recursos del equipo.</p>
             <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20optimizaci%C3%B3n%20de%20rendimiento." target="_blank" rel="noopener noreferrer">CONSULTAR SERVICIO ↗</a>
@@ -1631,7 +1851,7 @@ header::after {
             <img src="Imagenes/Soporte/soporte.png" alt="Asistencia y soporte técnico informático" loading="lazy">
           </div>
           <div class="service-content">
-            <div class="service-number">03 / TECH SUPPORT</div>
+            <div class="service-number"><span class="service-tech-icon" aria-hidden="true">⌘</span> 03 / TECH SUPPORT</div>
             <h3>Soporte técnico</h3>
             <p>Diagnóstico de problemas, instalación de software y ayuda para recuperar el control de tu ordenador.</p>
             <a class="button secondary" href="https://wa.me/34614059122?text=Hola%2C%20necesito%20ayuda%20con%20un%20problema%20inform%C3%A1tico." target="_blank" rel="noopener noreferrer">CONSULTAR SERVICIO ↗</a>
