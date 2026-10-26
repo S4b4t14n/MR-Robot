@@ -473,51 +473,6 @@ button:hover, .btn:hover, input[type="button"]:hover, input[type="submit"]:hover
   }
 }
 
-
-/* Panel de instrucciones con estética de botón arcade neón */
-.how-to-play{
-  position:relative;
-  overflow:hidden;
-  padding:14px 18px;
-  border:1px solid rgba(0,255,65,.36);
-  border-radius:12px;
-  background:linear-gradient(110deg,rgba(8,19,13,.98),rgba(19,8,30,.96),rgba(4,15,10,.98));
-  box-shadow:0 0 0 1px rgba(0,255,65,.08),0 0 15px rgba(0,255,65,.12),inset 0 0 16px rgba(151,62,255,.08);
-  color:#c9fbd5;
-  text-align:center;
-  animation:button-circuit-glitch 6.2s steps(1,end) infinite;
-}
-.how-to-play::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(110deg,transparent 18%,rgba(178,75,255,.08) 36%,rgba(198,92,255,.28) 50%,rgba(120,45,255,.08) 64%,transparent 82%);
-  opacity:.6;
-}
-.how-to-title{
-  position:relative;
-  margin:0 0 8px;
-  color:#b8ffca;
-  font-size:.88rem;
-  letter-spacing:2px;
-  text-shadow:0 0 7px rgba(0,255,65,.6),0 0 13px rgba(170,70,255,.25);
-}
-.how-to-play p{
-  position:relative;
-  margin:5px 0;
-  font-size:.82rem;
-  line-height:1.45;
-}
-.how-to-play strong{
-  color:#d9b3ff;
-  text-shadow:0 0 7px rgba(174,75,255,.7);
-}
-@media(max-width:760px){
-  .how-to-play{padding:11px 10px}
-  .how-to-play p{font-size:.74rem}
-}
-
 </style>
 </head>
 <body>
@@ -541,12 +496,7 @@ button:hover, .btn:hover, input[type="button"]:hover, input[type="submit"]:hover
 <div class="terminal-bar"><span>MR_ROBOT.EXE</span><span id="systemStatus">● ESPERANDO JUGADOR</span></div>
 <div class="hud"><div class="stat"><div class="stat-label">JUGADOR</div><div class="stat-value" id="playerNickHud">---</div></div><div class="stat"><div class="stat-label">PUNTUACIÓN</div><div class="stat-value" id="score">00000</div></div><div class="stat"><div class="stat-label">RÉCORD LOCAL</div><div class="stat-value" id="best">00000</div></div><div class="stat"><div class="stat-label">VIDAS / ARMA</div><div class="stat-value" id="lives">♥ ♥ ♥</div><div class="stat-value" id="weapon">LVL 1</div></div></div>
 <canvas id="game" width="900" height="560" aria-label="Juego arcade de naves"></canvas><div class="message" id="message">ESCRIBE TU NICK PARA COMENZAR</div>
-<section class="controls how-to-play" aria-label="Cómo jugar">
-  <h3 class="how-to-title">CÓMO JUGAR</h3>
-  <p><strong>← / →</strong> o <strong>A / D</strong> para moverte.</p>
-  <p><strong>ESPACIO</strong> para disparar y destruir los enemigos.</p>
-  <p>Esquiva los ataques, consigue puntos y supera tu récord.</p>
-</section>
+<div class="controls"><div class="button-row"><button class="btn primary" id="startBtn">▶ JUGAR</button><button class="btn" id="pauseBtn">Ⅱ PAUSA</button><button class="btn danger" id="restartBtn">↻ REINICIAR</button></div><div class="sound-settings"><button class="btn" id="soundToggle">♫ SONIDO: ON</button><label for="volume">VOLUMEN</label><input id="volume" type="range" min="0" max="100" value="35"></div><div class="mobile-controls"><button class="btn" id="leftBtn">◀ IZQUIERDA</button><button class="btn" id="fireBtn">FUEGO ●</button><button class="btn" id="rightBtn">DERECHA ▶</button></div><p class="help">← → o A/D para moverte · ESPACIO para disparar · P para pausar</p></div>
 </section>
 <section class="panel" id="nickPanel"><h2><span class="circuit-title">IDENTIFICACIÓN DE JUGADOR</span></h2><p>Elige tu nick antes de entrar al sistema.</p><form class="nick-form" id="nickForm"><input id="nickInput" maxlength="16" minlength="2" pattern="[A-Za-z0-9_-]{2,16}" placeholder="TuNick_01" autocomplete="nickname" required><button class="btn primary" type="submit">CONFIRMAR NICK</button></form><p class="help">2–16 caracteres: letras, números, guion o guion bajo.</p></section>
 <section class="panel"><h2><span class="circuit-title">ÚLTIMOS 5 JUGADORES</span></h2><p class="help">Resultados compartidos de las partidas terminadas en esta web.</p><div class="table-wrap"><table><thead><tr><th>#</th><th>NICK</th><th>PUNTUACIÓN</th><th>FECHA</th></tr></thead><tbody id="recentPlayers"><tr><td colspan="4">Cargando resultados…</td></tr></tbody></table></div><p id="leaderboardStatus" class="help" aria-live="polite"></p></section>
