@@ -1314,6 +1314,78 @@ header::after {
     0 0 18px rgba(255, 23, 68, .4);
 }
 
+/* ===== MR. ROBOT: TITULAR GLITCH ===== */
+
+.hero h1 {
+  animation: mrTitleEnter 0.9s cubic-bezier(.2,.75,.25,1) both;
+}
+
+.hero h1 span {
+  display: inline-block;
+  animation:
+    mrTitleGlow 3s ease-in-out 0.9s infinite,
+    mrTitleGlitch 6s linear 1.5s infinite;
+  will-change: text-shadow, transform;
+}
+
+/* Entrada del titular */
+@keyframes mrTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Brillo verde de MÁS */
+@keyframes mrTitleGlow {
+  0%, 100% {
+    text-shadow:
+      2px 0 rgba(0, 217, 255, .5),
+      -2px 0 rgba(255, 23, 68, .25),
+      0 0 8px rgba(157, 255, 0, .55),
+      0 0 22px rgba(157, 255, 0, .25);
+  }
+  50% {
+    text-shadow:
+      3px 0 rgba(0, 217, 255, .75),
+      -3px 0 rgba(255, 23, 68, .4),
+      0 0 12px rgba(157, 255, 0, .9),
+      0 0 35px rgba(157, 255, 0, .5);
+  }
+}
+
+/* Glitch breve y discreto */
+@keyframes mrTitleGlitch {
+  0%, 94%, 96%, 100% {
+    transform: translateX(0);
+  }
+  94.5% {
+    transform: translateX(-2px);
+  }
+  95% {
+    transform: translateX(2px);
+  }
+  95.5% {
+    transform: translateX(-1px);
+  }
+}
+
+/* Accesibilidad: respetar la preferencia de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1,
+  .hero h1 span {
+    animation: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
 </style>
 </head>
 
