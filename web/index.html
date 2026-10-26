@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b10">
+    <meta name="description" content="MR. ROBOT: mantenimiento, optimización y soporte técnico para ordenadores en Barcelona.">
     <title>MR. ROBOT | Reparamos tu Ordenador</title>
     <style>
         :root {
@@ -12,42 +13,40 @@
             --dark: #080b10;
             --panel: #111923;
             --text: #edf4f8;
+            --muted: #a8b7c5;
+            --line: #26333b;
         }
-
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             margin: 0;
             background: var(--dark);
             color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
-
+        a { color: inherit; }
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 4px;
+        }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
             padding: 22px 8%;
-            border-bottom: 1px solid #26333b;
+            border-bottom: 1px solid var(--line);
         }
-
         .logo {
             color: var(--green);
             font-weight: 900;
             letter-spacing: 2px;
             font-size: 22px;
+            text-decoration: none;
         }
-
-        .status {
-            color: var(--blue);
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-
+        .status { color: var(--blue); font-size: 12px; letter-spacing: 2px; }
         main {
-            min-height: 80vh;
+            min-height: 76vh;
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             align-items: center;
@@ -58,53 +57,34 @@
                 linear-gradient(90deg, #00d9ff08 1px, transparent 1px);
             background-size: 35px 35px;
         }
-
         .eyebrow {
             color: var(--green);
             letter-spacing: 3px;
             font-size: 12px;
             font-weight: bold;
         }
-
         h1 {
             font-size: clamp(42px, 6vw, 76px);
             line-height: 0.98;
             margin: 20px 0;
             letter-spacing: -3px;
         }
-
-        h1 span {
-            color: var(--green);
-        }
-
-        .intro {
-            color: #a8b7c5;
-            line-height: 1.8;
-            max-width: 510px;
-        }
-
-        .actions {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
+        h1 span { color: var(--green); }
+        .intro { color: var(--muted); line-height: 1.8; max-width: 510px; }
+        .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
         .button {
             display: inline-block;
             padding: 14px 20px;
             text-decoration: none;
+            text-align: center;
             font-weight: 800;
             border: 1px solid var(--green);
             color: var(--green);
             border-radius: 4px;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
         }
-
-        .primary {
-            background: var(--green);
-            color: #10150a;
-        }
-
+        .button:hover { transform: translateY(-2px); box-shadow: 0 0 18px #9dff0030; }
+        .primary { background: var(--green); color: #10150a; }
         .game-card {
             background: linear-gradient(145deg, #15232b, #0c1119);
             border: 1px solid #28434b;
@@ -112,7 +92,6 @@
             padding: 28px;
             box-shadow: 0 0 45px #00d9ff12;
         }
-
         .screen {
             min-height: 220px;
             border: 1px solid #35434c;
@@ -123,142 +102,224 @@
             flex-direction: column;
             background: radial-gradient(ellipse, #173b3b, #080b10 70%);
             margin-bottom: 20px;
+            overflow: hidden;
         }
-
         .chip {
             font-size: 68px;
+            color: var(--green);
             filter: drop-shadow(0 0 16px #9dff0088);
+            line-height: 1.2;
         }
-
-        .game-card h2 {
-            margin-bottom: 8px;
-        }
-
-        .game-card p {
-            color: #a8b7c5;
-            line-height: 1.6;
-        }
-
-        .services {
-            padding: 60px 8%;
-        }
-
-        .services h2 {
-            font-size: 30px;
-        }
-
+        .game-card h2 { margin-bottom: 8px; }
+        .game-card p { color: var(--muted); line-height: 1.6; }
+        .services, .reviews, .contact { padding: 60px 8%; }
+        .section-title { font-size: clamp(26px, 3vw, 34px); margin: 12px 0; letter-spacing: -1px; text-transform: uppercase; }
+        .section-intro { color: var(--muted); line-height: 1.7; max-width: 650px; }
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
             margin-top: 25px;
         }
-
         .service {
             background: var(--panel);
-            border: 1px solid #26333b;
-            padding: 24px;
+            border: 1px solid var(--line);
             border-radius: 8px;
+            overflow: hidden;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
-
-        .service h3 {
-            color: var(--blue);
+        .service:hover { transform: translateY(-4px); border-color: #00d9ff80; box-shadow: 0 10px 30px #00d9ff0d; }
+        .service img {
+            display: block;
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #0c1119;
+            border-bottom: 1px solid var(--line);
         }
-
-        .service p {
-            color: #a8b7c5;
-            line-height: 1.6;
+        .service-content { padding: 22px; }
+        .service h3 { color: var(--blue); margin: 0 0 10px; line-height: 1.35; }
+        .service p { color: var(--muted); line-height: 1.65; margin-bottom: 0; }
+        .reviews { background: #0b1016; border-top: 1px solid #19252d; border-bottom: 1px solid #19252d; }
+        .review-panel {
+            margin-top: 24px;
+            padding: 24px;
+            border: 1px solid #28434b;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #111923, #0b1016);
         }
-
+        .review-panel p { color: var(--muted); line-height: 1.7; margin-top: 0; }
+        .review-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field.full { grid-column: 1 / -1; }
+        label { color: var(--blue); font-size: 13px; font-weight: 700; }
+        input, textarea {
+            width: 100%;
+            background: #080d12;
+            color: var(--text);
+            border: 1px solid #35434c;
+            border-radius: 5px;
+            padding: 12px 13px;
+            font: inherit;
+        }
+        textarea { min-height: 110px; resize: vertical; }
+        .form-note { font-size: 12px; color: #8796a3; line-height: 1.6; margin: 14px 0 0 !important; }
+        .contact-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 28px;
+            border: 1px solid #28434b;
+            border-radius: 10px;
+            background: linear-gradient(120deg, #122019, #101923);
+        }
+        .contact-inner p { color: var(--muted); line-height: 1.7; margin-bottom: 0; }
         footer {
-            border-top: 1px solid #26333b;
+            border-top: 1px solid var(--line);
             padding: 25px 8%;
             color: #8796a3;
             font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
         }
-
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr 0.9fr; gap: 24px; }
+            .service-grid { gap: 12px; }
+            .service img { height: 155px; }
+            .service-content { padding: 17px; }
+        }
         @media (max-width: 760px) {
-            header {
-                padding: 18px 5%;
-            }
-
-            main {
-                grid-template-columns: 1fr;
-                padding: 45px 5%;
-            }
-
-            .service-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .services {
-                padding: 40px 5%;
-            }
-
-            h1 {
-                letter-spacing: -1px;
-            }
+            header { padding: 18px 5%; align-items: flex-start; flex-direction: column; }
+            .status { font-size: 10px; }
+            main { grid-template-columns: 1fr; padding: 45px 5%; min-height: auto; }
+            .services, .reviews, .contact { padding: 42px 5%; }
+            .service-grid { grid-template-columns: 1fr; }
+            .service img { height: 210px; }
+            h1 { letter-spacing: -1px; }
+            .contact-inner { align-items: flex-start; flex-direction: column; padding: 22px; }
+            .review-form { grid-template-columns: 1fr; }
+            .field.full { grid-column: auto; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">PC<span style="color:white">.</span>MR. ROBOT</div>
+        <a class="logo" href="#" aria-label="MR. ROBOT, inicio">PC<span style="color:white">.</span>MR. ROBOT</a>
         <div class="status">SYSTEM ONLINE // BCN</div>
     </header>
 
     <main>
         <section>
             <div class="eyebrow">[ YOUR PC. YOUR RULES. ]</div>
-            <h1>¿TU PC<br>NECESITA UN<br><span>MANTENIMIENTO?</span></h1>
+            <h1>TU ORDENADOR<br>PUEDE DAR MUCHO<br><span>MÁS.</span></h1>
             <p class="intro">
                 Recupera el rendimiento de tu ordenador.
                 Mantenimiento, optimización y soporte técnico
                 con una experiencia diseñada para gamers.
             </p>
             <div class="actions">
-                <a class="button primary" href="#juego">JUGAR MR. ROBOT</a>
+                <a class="button primary" href="../game/index.html">JUGAR MR. ROBOT</a>
                 <a class="button" href="#servicios">VER SERVICIOS</a>
             </div>
         </section>
 
-        <section class="game-card" id="juego">
+        <section class="game-card" id="juego" aria-labelledby="game-title">
             <div class="screen">
-                <div class="chip">▦</div>
+                <div class="chip" aria-hidden="true">▦</div>
                 <div class="eyebrow">PLAYER 01 // READY</div>
             </div>
-            <h2>MR. ROBOT: THE GAME</h2>
+            <h2 id="game-title">MR. ROBOT: THE GAME</h2>
             <p>
                 Recolecta componentes, esquiva los virus y
                 demuestra que puedes salvar el sistema.
             </p>
-            <a class="button primary" href="../game/index.html">
-                INICIAR MISIÓN →
-            </a>
+            <a class="button primary" href="../game/index.html">INICIAR MISIÓN →</a>
         </section>
     </main>
 
     <section class="services" id="servicios">
         <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
-        <h2>Servicios para tu setup</h2>
+        <h2 class="section-title">Servicios para tu setup</h2>
+        <p class="section-intro">Soluciones para cuidar tu equipo, mejorar su rendimiento y resolver problemas técnicos.</p>
         <div class="service-grid">
             <article class="service">
-                <h3>01 / Mantenimiento físico</h3>
-                <p>Limpieza interna, revisión de componentes y cuidado del equipo.</p>
+                <img src="../Imagenes/Mantenimiento/mantenimiento.png" alt="Mantenimiento físico de un ordenador" loading="lazy">
+                <div class="service-content">
+                    <h3>01 / Mantenimiento físico</h3>
+                    <p>Limpieza interna, revisión de componentes y cuidado del equipo.</p>
+                </div>
             </article>
             <article class="service">
-                <h3>02 / Optimización</h3>
-                <p>Revisión del sistema, programas de inicio y rendimiento general.</p>
+                <img src="../Imagenes/Optimizacion/Optimizacion.png" alt="Optimización y rendimiento del ordenador" loading="lazy">
+                <div class="service-content">
+                    <h3>02 / Optimización</h3>
+                    <p>Revisión del sistema, programas de inicio y rendimiento general.</p>
+                </div>
             </article>
             <article class="service">
-                <h3>03 / Soporte técnico</h3>
-                <p>Diagnóstico de problemas, instalación de software y asistencia.</p>
+                <img src="../Imagenes/Soporte/soporte.png" alt="Soporte técnico para ordenadores" loading="lazy">
+                <div class="service-content">
+                    <h3>03 / Soporte técnico</h3>
+                    <p>Diagnóstico de problemas, instalación de software y asistencia.</p>
+                </div>
             </article>
         </div>
     </section>
 
+    <section class="reviews" id="opiniones">
+        <div class="eyebrow">[ PLAYER FEEDBACK ]</div>
+        <h2 class="section-title">Opiniones de clientes</h2>
+        <p class="section-intro">¿Has trabajado con MR. ROBOT? Comparte tu experiencia para ayudar a otros usuarios.</p>
+        <div class="review-panel">
+            <p>Estamos preparando el sistema de opiniones. Puedes escribir tu comentario aquí; por ahora, el formulario es solo visual y no guarda ni publica mensajes.</p>
+            <form class="review-form" onsubmit="event.preventDefault(); alert('Este formulario todavía no está conectado. Para recibir opiniones reales hay que configurar un servicio de almacenamiento y moderación.');">
+                <div class="field">
+                    <label for="review-name">Tu nombre</label>
+                    <input id="review-name" name="name" type="text" placeholder="Cómo quieres aparecer" autocomplete="name" required>
+                </div>
+                <div class="field">
+                    <label for="review-rating">Valoración</label>
+                    <select id="review-rating" name="rating" style="background:#080d12;color:#edf4f8;border:1px solid #35434c;border-radius:5px;padding:12px 13px;font:inherit;">
+                        <option value="5">5 - Excelente</option>
+                        <option value="4">4 - Muy bueno</option>
+                        <option value="3">3 - Bueno</option>
+                        <option value="2">2 - Mejorable</option>
+                        <option value="1">1 - Malo</option>
+                    </select>
+                </div>
+                <div class="field full">
+                    <label for="review-message">Tu comentario</label>
+                    <textarea id="review-message" name="message" placeholder="Cuéntanos tu experiencia..." required></textarea>
+                </div>
+                <div class="field full">
+                    <button class="button primary" type="submit" style="cursor:pointer;justify-self:start;">ENVIAR COMENTARIO</button>
+                </div>
+            </form>
+            <p class="form-note">Para evitar opiniones falsas o spam, recomiendo que los comentarios se revisen antes de aparecer publicados.</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="contact-inner">
+            <div>
+                <div class="eyebrow">[ NEED TECH SUPPORT? ]</div>
+                <h2 class="section-title">¿Hablamos de tu ordenador?</h2>
+                <p>Cuéntame qué le ocurre a tu equipo y vemos qué solución puede necesitar.</p>
+            </div>
+            <a class="button primary" href="https://wa.me/34614059122?text=Hola%2C%20vengo%20de%20la%20web%20de%20MR.%20ROBOT%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">CONTACTAR POR WHATSAPP →</a>
+        </div>
+    </section>
+
     <footer>
-        MR. ROBOT // Soporte técnico para ordenadores · Barcelona
+        <span>MR. ROBOT // Soporte técnico para ordenadores · Barcelona</span>
+        <a href="#contacto">Contacto</a>
     </footer>
 </body>
 </html>
