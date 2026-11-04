@@ -214,12 +214,18 @@ header {
 .hero h1 {
   position: relative;
   margin: 22px 0;
-  font-size: clamp(43px,5.5vw,76px);
-  line-height: .99;
-  letter-spacing: -3.5px;
+  font-family: 'Black Ops One', 'Arial Black', sans-serif;
+  font-size: clamp(43px, 5.5vw, 76px);
   font-weight: 950;
+  line-height: .99;
+  letter-spacing: -2px;
   text-transform: uppercase;
-  text-shadow: 2px 0 rgba(0,217,255,.12);
+  color: #f5f5f5;
+  -webkit-text-stroke: 1px rgba(255,255,255,.25);
+  text-shadow:
+    3px 0 #39ff14,
+    -2px 0 rgba(255,255,255,.35),
+    0 0 16px rgba(57,255,20,.35);
 }
 
 .hero h1 span {
@@ -2018,6 +2024,162 @@ header::after {
 @keyframes bootMessageGlitch{0%,65%,100%{transform:translateX(0);opacity:1}67%{transform:translateX(-4px);opacity:.45;filter:brightness(2)}69%{transform:translateX(4px);opacity:1}71%{transform:translateX(-2px);opacity:.25}73%{transform:translateX(0);opacity:1}88%{opacity:1}91%{opacity:.18}94%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.boot-intro{display:none!important}}
 
+
+
+/* ===== GLITCH DIGITAL MR. ROBOT ===== */
+.hero h1.glitch-title {
+  position: relative;
+  isolation: isolate;
+}
+.hero h1.glitch-title::before,
+.hero h1.glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  white-space: pre-line;
+  color: transparent;
+  opacity: 0;
+  z-index: 1;
+}
+.hero h1.glitch-title::before {
+  text-shadow: 3px 0 #39ff14;
+  clip-path: inset(15% 0 72% 0);
+  animation: mrGlitchDigital 5s infinite;
+}
+.hero h1.glitch-title::after {
+  text-shadow: -3px 0 #ffffff;
+  clip-path: inset(65% 0 18% 0);
+  animation: mrGlitchDigital2 6s infinite;
+}
+@keyframes mrGlitchDigital {
+  0%, 88%, 100% { opacity: 0; transform: translateX(0); }
+  90% { opacity: .8; transform: translateX(-4px); }
+  92% { opacity: .6; transform: translateX(4px); }
+  94% { opacity: 0; }
+}
+@keyframes mrGlitchDigital2 {
+  0%, 84%, 100% { opacity: 0; transform: translateX(0); }
+  87% { opacity: .7; transform: translateX(4px); }
+  90% { opacity: .5; transform: translateX(-3px); }
+  92% { opacity: 0; }
+}
+
+
+
+/* ===== UNIFICACIÓN DE TITULARES MR. ROBOT ===== */
+/* Encabezados principales y títulos de las tarjetas */
+.feature-content h2,
+.section-heading h2,
+.contact-panel h2 {
+  font-family: "Black Ops One", Impact, sans-serif;
+  font-weight: 400;
+  color: #f5f5f2;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  text-shadow:
+    2px 0 rgba(0, 217, 255, .28),
+    -2px 0 rgba(191, 0, 255, .16),
+    0 0 14px rgba(157, 255, 0, .12),
+    0 4px 18px rgba(0, 0, 0, .55);
+}
+
+/* El título de cada servicio conserva una lectura clara y gana presencia */
+.service h3 {
+  position: relative;
+  color: #f5f5f2;
+  font-family: "Black Ops One", Impact, sans-serif;
+  font-size: clamp(20px, 1.8vw, 25px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+  text-shadow:
+    2px 0 rgba(0, 217, 255, .28),
+    -2px 0 rgba(191, 0, 255, .16),
+    0 0 12px rgba(157, 255, 0, .13);
+  transition: color .25s ease, text-shadow .25s ease, transform .25s ease;
+}
+
+/* Acento verde para identificar cada servicio */
+.service h3::first-letter {
+  color: var(--green);
+}
+
+/* Glitch breve al interactuar con una tarjeta */
+.service:hover h3 {
+  color: #ffffff;
+  text-shadow:
+    3px 0 rgba(0, 217, 255, .65),
+    -3px 0 rgba(191, 0, 255, .4),
+    0 0 8px rgba(157, 255, 0, .72),
+    0 0 22px rgba(157, 255, 0, .3);
+  transform: translateX(2px);
+}
+
+/* Los encabezados de sección reciben un brillo verde discreto */
+.section-heading h2,
+.contact-panel h2 {
+  text-shadow:
+    2px 0 rgba(0, 217, 255, .25),
+    -2px 0 rgba(191, 0, 255, .14),
+    0 0 16px rgba(157, 255, 0, .18),
+    0 4px 18px rgba(0, 0, 0, .55);
+}
+
+/* Accesibilidad: respetar la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .service h3 {
+    transition: none;
+  }
+  .service:hover h3 {
+    transform: none;
+  }
+}
+
+
+
+/* ===== GLITCH DE PORTADA TAMBIÉN EN EL TITULAR DE SERVICIOS ===== */
+.section-heading h2.glitch-title {
+  position: relative;
+  isolation: isolate;
+  animation:
+    mrTitleEnter .9s cubic-bezier(.2,.75,.25,1) both,
+    mrMainGlitch 7s linear 1.2s infinite;
+}
+
+.section-heading h2.glitch-title::before,
+.section-heading h2.glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  white-space: normal;
+  color: transparent;
+  opacity: 0;
+  z-index: 1;
+}
+
+.section-heading h2.glitch-title::before {
+  text-shadow: 3px 0 #39ff14;
+  clip-path: inset(15% 0 72% 0);
+  animation: mrGlitchDigital 5s infinite;
+}
+
+.section-heading h2.glitch-title::after {
+  text-shadow: -3px 0 #ffffff;
+  clip-path: inset(65% 0 18% 0);
+  animation: mrGlitchDigital2 6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-heading h2.glitch-title,
+  .section-heading h2.glitch-title::before,
+  .section-heading h2.glitch-title::after {
+    animation: none !important;
+  }
+}
+
 </style>
 </head>
 
@@ -2034,7 +2196,7 @@ header::after {
 <header>
   <div class="container nav">
     <a class="logo-brand" href="#inicio" aria-label="MR. ROBOT, inicio">
-      <img class="logo-header" src="Imagenes/Logo/logo-mr-robot.png" alt="Logo de MR. ROBOT">
+      <img class="logo-header" src="Imagenes/Logo/logo-header.png" alt="Logo de MR. ROBOT">
       <span class="logo-wordmark">
         <strong>MR. ROBOT</strong>
         <small>SERVICIO TÉCNICO INFORMÁTICO</small>
@@ -2055,11 +2217,11 @@ header::after {
       <div>
         <div class="eyebrow">[ TU ORDENADOR. TUS REGLAS. ]</div>
 
-        <h1>
-          TU ORDENADOR PUEDE<br>
-          DAR MUCHO<br>
-          <span>MÁS.</span>
-        </h1>
+        <h1 class="glitch-title" data-text="TU ORDENADOR PUEDE&#10;DAR MUCHO&#10;MÁS.">
+  TU ORDENADOR PUEDE<br>
+  DAR MUCHO<br>
+  <span>MÁS.</span>
+</h1>
 
         <p class="hero-copy">
           ¿Tu ordenador va lento, se calienta demasiado o no rinde como debería?
@@ -2101,7 +2263,7 @@ header::after {
     <div class="container">
       <div class="section-heading">
         <div class="eyebrow">[ LOAD YOUR NEXT LEVEL ]</div>
-        <h2>Tu ordenador, en su mejor versión.</h2>
+        <h2 class="glitch-title" data-text="TU ORDENADOR, EN SU MEJOR VERSIÓN.">TU ORDENADOR, EN SU MEJOR VERSIÓN.</h2>
         <p>Soluciones informáticas para cuidar tu equipo, mejorar su rendimiento y resolver los problemas que te impiden aprovecharlo.</p>
       </div>
 
