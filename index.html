@@ -2016,9 +2016,16 @@ header::after {
 .boot-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;overflow:hidden;background:radial-gradient(ellipse at center,rgba(0,255,65,.10),transparent 48%),repeating-linear-gradient(0deg,rgba(0,255,65,.025) 0 1px,transparent 1px 4px),#020604;opacity:1;visibility:visible;transition:opacity .65s ease,visibility .65s ease}
 .boot-intro::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 49.7%,rgba(157,255,0,.18) 50%,transparent 50.3%);transform:translateY(-100%);animation:bootScan 1.5s ease-out .2s both}
 .boot-intro.is-finished{opacity:0;visibility:hidden;pointer-events:none}
-.boot-message{position:relative;max-width:900px;color:#f4f8f2;font:400 clamp(27px,6vw,68px)/1.15 "Black Ops One",Impact,sans-serif;text-align:center;text-transform:uppercase;text-shadow:2px 0 rgba(0,217,255,.5),-2px 0 rgba(191,0,255,.35),0 0 22px rgba(0,255,65,.2);animation:bootMessageIn .45s steps(5,end) .15s both,bootMessageGlitch 2.2s steps(1,end) .7s both}
+.boot-message{position:relative;width:100%;max-width:900px;padding:0 4px;color:#f4f8f2;font:400 clamp(27px,6vw,68px)/1.15 "Black Ops One",Impact,sans-serif;text-align:center;text-transform:uppercase;text-shadow:2px 0 rgba(0,217,255,.5),-2px 0 rgba(191,0,255,.35),0 0 22px rgba(0,255,65,.2);animation:bootMessageIn .45s steps(5,end) .15s both,bootMessageGlitch 2.2s steps(1,end) .7s both}
+.boot-first-line{display:block;color:#f4f8f2}
 .boot-message span{display:block;margin-top:.12em;color:var(--green);text-shadow:0 0 7px rgba(157,255,0,.9),0 0 25px rgba(157,255,0,.55)}
 .boot-tag{display:block;margin-bottom:18px;color:var(--green);font:700 10px "Oxanium",monospace;letter-spacing:.32em}
+@media(max-width:600px){
+  .boot-intro{padding:18px}
+  .boot-message{max-width:100%;font-size:clamp(18px,6.5vw,34px);line-height:1.25;letter-spacing:0;overflow-wrap:normal}
+  .boot-first-line,.boot-message span{white-space:normal}
+  .boot-tag{margin-bottom:14px;font-size:8px;letter-spacing:.14em}
+}
 @keyframes bootScan{to{transform:translateY(100%)}}
 @keyframes bootMessageIn{from{opacity:0;clip-path:inset(0 100% 0 0);filter:brightness(2.5)}to{opacity:1;clip-path:inset(0 0 0 0);filter:brightness(1)}}
 @keyframes bootMessageGlitch{0%,65%,100%{transform:translateX(0);opacity:1}67%{transform:translateX(-4px);opacity:.45;filter:brightness(2)}69%{transform:translateX(4px);opacity:1}71%{transform:translateX(-2px);opacity:.25}73%{transform:translateX(0);opacity:1}88%{opacity:1}91%{opacity:.18}94%{opacity:1}}
@@ -2187,7 +2194,7 @@ header::after {
 <div class="boot-intro" id="boot-intro" aria-hidden="true">
   <div class="boot-message">
     <small class="boot-tag">/// MR. ROBOT SYSTEM STARTUP ///</small>
-    TU ORDENADOR, TU RITMO.
+    <div class="boot-first-line">TU ORDENADOR, TU RITMO.</div>
     <span>TU PROPIA FRECUENCIA.</span>
   </div>
 </div>
